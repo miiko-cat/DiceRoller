@@ -1,6 +1,5 @@
 package android.com.example.diceroller
 
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -19,10 +18,12 @@ class MainActivity : AppCompatActivity() {
         val rollButton : Button = findViewById(R.id.roll_button)
         val countButton : Button = findViewById(R.id.count_button)
         val resetButton : Button = findViewById(R.id.reset_button)
+        val clearButton : Button = findViewById(R.id.clear_button)
 
         rollButton.setOnClickListener{ rollDice() }
         countButton.setOnClickListener{ countDice() }
         resetButton.setOnClickListener{ resetDice() }
+        clearButton.setOnClickListener{ clearDice() }
     }
 
     private fun rollDice() {
@@ -44,8 +45,8 @@ class MainActivity : AppCompatActivity() {
         if(diceImage1.tag == null || diceImage2.tag == null) return
         // Replace imageView with greater value
         // if value is 6 it is not changed
-        val replacedDiceImage1 = getCountDiceImage(diceImage1.tag as Int)
-        val replacedDiceImage2 = getCountDiceImage(diceImage2.tag as Int)
+        val replacedDiceImage1 = getCountUpDiceImage(diceImage1.tag as Int)
+        val replacedDiceImage2 = getCountUpDiceImage(diceImage2.tag as Int)
 
         diceImage1.apply{
             setImageResource(replacedDiceImage1)
@@ -54,6 +55,28 @@ class MainActivity : AppCompatActivity() {
         diceImage2.apply{
             setImageResource(replacedDiceImage2)
             tag = replacedDiceImage2
+        }
+    }
+
+    private fun resetDice() {
+        diceImage1.apply {
+            setImageResource(R.drawable.dice_1)
+            tag = R.drawable.dice_1
+        }
+        diceImage2.apply {
+            setImageResource(R.drawable.dice_1)
+            tag = R.drawable.dice_1
+        }
+    }
+
+    private fun clearDice() {
+        diceImage1.apply {
+            setImageResource(R.drawable.empty_dice)
+            tag = null
+        }
+        diceImage2.apply {
+            setImageResource(R.drawable.empty_dice)
+            tag = null
         }
     }
 
@@ -71,7 +94,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Get a count drawable image and return an integer for the drawable resource
-    private fun getCountDiceImage(resourceID: Int) : Int {
+    private fun getCountUpDiceImage(resourceID: Int) : Int {
         return when (resourceID) {
             R.drawable.dice_1 -> R.drawable.dice_2
             R.drawable.dice_2 -> R.drawable.dice_3
@@ -79,17 +102,6 @@ class MainActivity : AppCompatActivity() {
             R.drawable.dice_4 -> R.drawable.dice_5
             R.drawable.dice_5 -> R.drawable.dice_6
             else -> R.drawable.dice_6
-        }
-    }
-
-    private fun resetDice() {
-        diceImage1.apply {
-            setImageResource(R.drawable.dice_1)
-            tag = R.drawable.dice_1
-        }
-        diceImage2.apply {
-            setImageResource(R.drawable.dice_1)
-            tag = R.drawable.dice_1
         }
     }
 }
