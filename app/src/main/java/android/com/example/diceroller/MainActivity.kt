@@ -6,8 +6,8 @@ import android.widget.Button
 import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
-    lateinit var diceImage1 : ImageView
-    lateinit var diceImage2 : ImageView
+    private lateinit var diceImage1 : ImageView
+    private lateinit var diceImage2 : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
